@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins/axios.js'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
