@@ -1,10 +1,29 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Navigator />
+    <router-view />
+    <Footer />
   </div>
 </template>
 
+<script>
+import Navigator from "@/components/Navigator.vue";
+import Footer from "@/components/Footer.vue";
+export default {
+  components: {
+    Navigator: Navigator,
+    Footer: Footer,
+  },
+};
+</script>
+
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
