@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class = "product">
+    <Navigator />
     <div class="header">
       <div class="info">
         <img src="@/assets/tmall/logo.png" />
@@ -123,10 +124,13 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navigator from "@/components/Navigator.vue";
+import Footer from "@/components/Footer.vue";
 import InShopSearch from "@/components/InShopSearch.vue";
 const axios = require("axios");
 axios.defaults.baseURL = "/api";
@@ -139,6 +143,8 @@ export default {
     };
   },
   components: {
+    Navigator: Navigator,
+    Footer: Footer,
     InShopSearch: InShopSearch,
   },
   methods: {},

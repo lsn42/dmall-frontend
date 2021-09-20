@@ -1,18 +1,12 @@
 <template>
   <div id="app">
-    <Navigator />
     <router-view />
-    <Footer />
   </div>
 </template>
 
 <script>
-import Navigator from "@/components/Navigator.vue";
-import Footer from "@/components/Footer.vue";
 export default {
   components: {
-    Navigator: Navigator,
-    Footer: Footer,
   },
 };
 </script>

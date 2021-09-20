@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <Navigator />
     <div class="header">
       <img src="@/assets/tmall/logo.png" />
       <Search />
@@ -47,10 +48,13 @@
         <MallFloor v-for="f in floors" :key="f.category.id" :info="f" />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navigator from "@/components/Navigator.vue";
+import Footer from "@/components/Footer.vue";
 import MallFloor from "@/components/Index/MallFloor.vue";
 import Search from "@/components/Search.vue";
 const axios = require("axios");
@@ -64,6 +68,8 @@ export default {
     };
   },
   components: {
+    Navigator: Navigator,
+    Footer: Footer,
     MallFloor: MallFloor,
     Search: Search,
   },

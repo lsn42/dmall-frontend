@@ -1,5 +1,6 @@
 <template>
   <div class="category">
+    <Navigator />
     <div class="header">
       <img src="@/assets/tmall/logo.png" />
       <Search />
@@ -13,10 +14,13 @@
         <NotFound />
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navigator from "@/components/Navigator.vue";
+import Footer from "@/components/Footer.vue";
 import Search from "@/components/Search.vue";
 import SortBar from "@/components/List/SortBar.vue";
 import Show from "@/components/List/Show.vue";
@@ -31,6 +35,8 @@ export default {
     };
   },
   components: {
+    Navigator: Navigator,
+    Footer: Footer,
     Search: Search,
     SortBar: SortBar,
     Show: Show,

@@ -1,0 +1,39 @@
+form {
+  div {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+
+    i {
+      width: 40px;
+      height: 40px;
+      background-color: #ccc;
+      line-height: 40px;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .login-input {
+      border: 1px solid #f1eeee;
+      height: 38px;
+      outline: none;
+      font-size: 14px;
+      padding-left: 10px;
+      flex: 1;
+    }
+  }
+
+  .login-button {
+    border: 1px solid #ff9000;
+    border-radius: 3px;
+    height: 42px;
+    line-height: 42px;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #ff0036;
+    border-color: #ff0036;
+  }
+}
