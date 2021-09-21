@@ -27,7 +27,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .item {
   width: 220px;
   height: 333px;

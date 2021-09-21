@@ -1,5 +1,5 @@
 <template>
-  <a class="item">
+  <a class="mall_floor_item" :href="'/product/' + info.id">
     <img :src="info.smallimage" :alt="info.name" />
     <div class="title">{{ info.title }}</div>
     <div class="price">{{ "￥" + info.price }}</div>
@@ -11,8 +11,8 @@ export default {
   props: ["info"],
 };
 </script>
-<style lang="scss">
-.item {
+<style lang="scss" scoped>
+.mall_floor_item {
   width: 235px;
   height: 301px;
   margin-left: 13px;
@@ -45,7 +45,7 @@ export default {
     margin: 10px auto;
   }
 }
-.item:hover {
+a:hover {
   border: 1px solid #ff0036;
   cursor: pointer;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="nav">
+  <div class="user_navigator">
     <div class="main">
       <div class="login">
         <div v-if="is_logined">
@@ -175,7 +175,7 @@
 </template>
 <script>
 export default {
-  name: "Navigator",
+  name: "UserNavigator",
   data() {
     return {
       user: {},
@@ -185,7 +185,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.nav {
+.user_navigator {
   width: auto;
   height: 32px;
   font-family: "Microsoft YaHei UI", Tahoma, serif;

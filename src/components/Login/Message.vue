@@ -1,11 +1,11 @@
 <template>
   <div class="message">
-    <form action="" method="post" class="message">
+    <form action="" method="post" class="message" @submit.prevent="submit">
       <div class="phone">
         <input
           type="tel"
           class="login-input"
-          v-model="forms.message.phone"
+          v-model="form.phone"
           placeholder="请输入手机号"
         />
       </div>
@@ -13,7 +13,7 @@
         <input
           type="text"
           class="login-input"
-          v-model="forms.message.code"
+          v-model="form.code"
           placeholder="请输入验证码"
         />
         <button>获取验证码</button>
@@ -24,37 +24,18 @@
 </template>
 
 <script>
-import * as net from "@/utils/net.js";
 export default {
   name: "Message",
   props: ["status"],
   data() {
     return {
-      form: { name: "", password: "", code: "" },
+      form: { phone: "", code: "" },
     };
   },
   methods: {
     submit() {
-      net
-        .login(this.form)
-        .then((res) => {
-          if (res.data.code == 200) {
-            net.save_token(res);
-            // window.location = "/";
-          } else if (res.data.code == 100) {
-            this.status.is_failed = true;
-            this.status.fail_msg = res.data.msg;
-          } else {
-            this.$alert("hello");
-          }
-        })
-        .catch((err) => {
-          this.$alert(err.request);
-        });
+      this.$emit("submit", this.form);
     },
   },
 };
 </script>
-
-<style>
-</style>

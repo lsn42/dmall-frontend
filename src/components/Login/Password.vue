@@ -1,7 +1,7 @@
 <template>
   <div class="password">
-    <div class="failed" v-if="status.is_failed">登录失败</div>
-    <form action="" method="post" @submit.prevent="submit()">
+    <div class="failed" v-if="status.is_failed"> {{status.fail_msg}}</div>
+    <form action="" method="post" @submit.prevent="submit">
       <div class="name">
         <i class="el-icon-user" />
         <input
@@ -33,14 +33,13 @@
     </form>
     <div class="bottom">
       <a href="#">忘记密码</a>
-      <a href="#" @click="test">忘记会员名</a>
+      <a href="#">忘记会员名</a>
       <a href="/register">免费注册</a>
     </div>
   </div>
 </template>
 
 <script>
-import * as net from "@/utils/net.js";
 export default {
   name: "Password",
   props: ["status"],
@@ -51,22 +50,7 @@ export default {
   },
   methods: {
     submit() {
-      net
-        .login(this.form)
-        .then((res) => {
-          if (res.data.code == 200) {
-            net.save_token(res);
-            // window.location = "/";
-          } else if (res.data.code == 100) {
-            this.status.is_failed = true;
-            this.status.fail_msg = res.data.msg;
-          } else {
-            this.$alert("hello");
-          }
-        })
-        .catch((err) => {
-          this.$alert(err.request);
-        });
+      this.$emit("submit", this.form);
     },
   },
 };

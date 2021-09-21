@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Qs from "qs";
 
+axios.defaults.baseURL = "/api";
+
 export function get_token() {
   return localStorage.getItem("token");
 }
@@ -35,4 +37,21 @@ export function test() {
     items: [1, 2, 3],
     id: "123"
   }).then((res) => console.log(res));
+}
+export function get_advertisements() {
+  return axios.get("ad");
+}
+export function get_categories() {
+  return axios.get("category/productCategories");
+}
+export function get_floors() {
+  return axios.get("product/findProductsByCategory");
+}
+export function get_all_product_by_first_category_id(id) {
+  let url = "product/findAllByCategory/first/" + id;
+  return axios.get(url);
+}
+export function get_product(id) {
+  let url = "/product/getProductById/" + id;
+  return axios.get(url);
 }

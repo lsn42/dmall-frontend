@@ -1,5 +1,5 @@
 <template>
-  <div class="error">
+  <div class="not_found">
     <h2>
       喵~没找到与{{ keyword }}相关的 商品 哦，要不您换个关键词我帮您再找找看
     </h2>

@@ -21,7 +21,7 @@
             <div class="normal" v-if="is_normal">
               <el-tabs v-model="login_type">
                 <el-tab-pane label="密码登录" name="password">
-                  <Password :status="status" />
+                  <Password :status="status" @submit="password_submit" />
                 </el-tab-pane>
                 <el-tab-pane label="短信验证" name="message">
                   <Message :status="status" />
@@ -46,8 +46,6 @@ import Password from "@/components/Login/Password.vue";
 import Message from "@/components/Login/Message.vue";
 import QRCode from "@/components/Login/QRCode.vue";
 import PlainFooter from "@/components/Login/PlainFooter.vue";
-const axios = require("axios");
-axios.defaults.baseURL = "/api";
 export default {
   data() {
     return {
@@ -64,8 +62,28 @@ export default {
     };
   },
   methods: {
-    test() {
-      net.test();
+    password_submit(form) {
+      net
+        .login(form)
+        .then((res) => {
+          if (res.data.code == 200) {
+            net.save_token(res);
+            this.status.is_failed = false;
+            this.status.fail_msg = "";
+            // window.location = "/";
+            this.$alert("登录成功");
+          } else if (res.data.code == 100) {
+            this.status.is_failed = true;
+            this.status.fail_msg = res.data.msg;
+          } else {
+            this.$alert("未知");
+            console.log(res);
+          }
+        })
+        .catch((err) => {
+          this.$alert("未知");
+          console.log(err.request);
+        });
     },
   },
   components: {

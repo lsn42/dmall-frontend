@@ -1,5 +1,5 @@
 <template>
-  <div class="floor">
+  <div class="mall_floor">
     <div class="title">
       <span class="mark"></span>
       <div class="name">{{ info.category.name }}</div>
@@ -8,7 +8,7 @@
       <a :href="'/list/' + info.category.id">
         <img
           :src="
-            'http://172.16.82.15:8081/images/fore/WebsiteImage/show/' +
+            'api/images/fore/WebsiteImage/show/' +
             info.category.id +
             '.jpg'
           "
@@ -32,7 +32,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.floor {
+.mall_floor {
   margin-top: 20px;
   width: 100%;
   overflow: hidden;
@@ -62,6 +62,7 @@ export default {
     margin-top: 10px;
     margin: 0 auto;
     text-align: center;
+    display:flex;
     img {
       float: left;
       position: relative;

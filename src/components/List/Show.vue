@@ -1,6 +1,6 @@
 <template>
   <div class="show">
-    <Item v-for="p in products" :key="p.id" :product="p"/>
+    <Item v-for="p in products" :key="p.id" :product="p" />
   </div>
 </template>
 
@@ -15,5 +15,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.show {
+  display: inline-block;
+  width: 1210px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
 </style>
