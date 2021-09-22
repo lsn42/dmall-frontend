@@ -1,7 +1,9 @@
 <template>
-  <nav class="simple_navigator">
+  <div class="header">
     <a class="logo" href="/" target="_self">
-      <img src="@/assets/image/tmall/logo2.png" /><span class="cart">购物车</span>
+      <img src="@/assets/image/tmall/logo2.png" /><span class="cart"
+        >购物车</span
+      >
     </a>
     <div class="container">
       <form action="/product" method="get">
@@ -25,26 +27,47 @@
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
 </template>
 
 <script>
+import axios from "axios";
+axios.defaults.baseURL = "/api";
+////////////////////////////////////////////////////////////////////////////////
+function get_categories(that) {
+  that;
+  return axios.get("category/productCategories");
+}
 export default {
-  name: "SimpleNavigator",
-  components: {},
+  name: "Header",
+  data() {
+    return {
+      categories: [],
+    };
+  },
+  components: {
+    "quick-search": {
+      props: ["label", "url"],
+      template: `<a :href="url">{{label.split("/")[0]}}</a>`,
+    },
+  },
+  created() {
+    get_categories(this).then((response) => {
+      this.categories = response.data.extend.categories;
+    });
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.simple_navigator {
+.header {
   width: 61.803%;
   height: 130px;
   margin: auto;
   display: flex;
   img {
-    float: left;
-    width: 240px;
-    height: 130px;
+    margin-top: 8px;
+    width: 190px;
   }
   .container {
     width: 625px;

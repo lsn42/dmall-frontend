@@ -32,6 +32,12 @@ const routes = [{
 
   },
   {
+    path: '/place_order',
+    name: 'PlaceOrder',
+    component: () => import( /* webpackChunkName: "main" */ '../views/PlaceOrder.vue')
+
+  },
+  {
     path: '/home',
     name: 'Home',
     component: Home

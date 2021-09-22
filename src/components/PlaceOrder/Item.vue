@@ -1,10 +1,7 @@
 <template>
   <div class="item">
     <div class="upper">
-      <el-checkbox v-model="item.is_selected"></el-checkbox>
       <span class="shop_name">{{ item.shop }}旗舰店</span>
-      <span class="wangwang"></span>
-      <span class="coupon"></span>
     </div>
     <div class="lower">
       <div class="image">
@@ -19,7 +16,7 @@
       </div>
       <div class="count">
         <el-input-number
-          v-model="item.count"
+          v-model="count"
           :min="1"
           :max="item.max_count"
           label="描述文字"
@@ -27,10 +24,6 @@
       </div>
       <div class="total_price">
         <p class="total">{{ item.price * item.count }}</p>
-      </div>
-      <div class="operation">
-        <a>移入收藏夹</a>
-        <a>删除</a>
       </div>
     </div>
   </div>
@@ -44,12 +37,7 @@ export default {
     return {
       count: 0,
     };
-  },
-  methods: {
-    destory() {
-      this.$emit("destory", this.id);
-    },
-  },
+  }
 };
 </script>
 

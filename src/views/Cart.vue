@@ -1,8 +1,9 @@
 <template>
   <div class="cart">
     <UserNavigator />
-    <SimpleNavigator />
-    <Item v-for="i in items" :key="i.id" :item="i" />
+    <Header />
+    <Item v-for="i in items" :key="i.id" :item="i" @destory="remove" />
+    <el-button @click="order">结算</el-button>
     <Footer />
   </div>
 </template>
@@ -39,7 +40,7 @@ function get_product_detail(that, id) {
 }
 ////////////////////////////////////////////////////////////////////////////////
 import UserNavigator from "@/components/UserNavigator.vue";
-import SimpleNavigator from "@/components/Cart/SimpleNavigator.vue";
+import Header from "@/components/Cart/Header.vue";
 import Item from "@/components/Cart/Item.vue";
 import Footer from "@/components/Footer.vue";
 export default {
@@ -51,9 +52,32 @@ export default {
   },
   components: {
     UserNavigator: UserNavigator,
-    SimpleNavigator: SimpleNavigator,
+    Header: Header,
     Item: Item,
     Footer: Footer,
+  },
+  methods: {
+    order() {
+      let selected = [];
+      for (let i in this.items) {
+        if (this.items[i].is_selected == true) {
+          selected.push(this.items[i]);
+        }
+      }
+      this.$router.push({
+        name: "PlaceOrder",
+        params: {
+          items: selected,
+        },
+      });
+    },
+    remove(id) {
+      for (let i in this.items) {
+        if (this.items[i].id == id) {
+          this.items.splice(i, 1);
+        }
+      }
+    },
   },
   created() {
     get_cart(this).then((res) => {
@@ -68,6 +92,8 @@ export default {
             }
           }
           this.$set(this.items, i, {
+            is_selected: false,
+            order_item_id: get[i].id,
             id: product.product.id,
             name: product.product.name,
             shop: product.product.title,

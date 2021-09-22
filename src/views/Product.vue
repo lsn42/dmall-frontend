@@ -101,7 +101,7 @@ export default {
         productId: this.product.product.id,
       }).then((res) => {
         if (res.data.code == 200) {
-          this.$alert("添加到购物车成功");
+          this.$alert("添加到购物车成功！");
         } else {
           this.$alert("未知错误");
           console.log(res);
