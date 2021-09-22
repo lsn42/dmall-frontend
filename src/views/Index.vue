@@ -23,7 +23,21 @@
 </template>
 
 <script>
-import * as net from "@/utils/net.js";
+import axios from "axios";
+axios.defaults.baseURL = "/api";
+////////////////////////////////////////////////////////////////////////////////
+function get_advertisements(that) {
+  that;
+  return axios.get("ad");
+}
+function get_floors(that) {
+  that;
+  return axios.get("product/findProductsByCategory");
+}
+function get_categories(that) {
+  that;
+  return axios.get("category/productCategories");
+}
 import UserNavigator from "@/components/UserNavigator.vue";
 import Search from "@/components/Index/Search.vue";
 import DomainNavigator from "@/components/Index/DomainNavigator.vue";
@@ -48,13 +62,13 @@ export default {
   },
   methods: {},
   created() {
-    net.get_advertisements().then((response) => {
+    get_advertisements(this).then((response) => {
       this.advertisements = response.data.extend.advertisements;
     });
-    net.get_floors().then((response) => {
+    get_floors(this).then((response) => {
       this.floors = response.data.extend.floors;
     });
-    net.get_categories().then((response) => {
+    get_categories(this).then((response) => {
       this.categories = response.data.extend.categories;
     });
   },

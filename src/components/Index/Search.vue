@@ -1,6 +1,6 @@
 <template>
   <nav class="search">
-    <img src="@/assets/tmall/logo.png" />
+    <img src="@/assets/image/tmall/logo.png" />
     <div class="container">
       <form action="/product" method="get">
         <div class="search-input-container">

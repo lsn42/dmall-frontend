@@ -1,7 +1,7 @@
 <template>
   <nav class="login-nav">
     <a href="/" target="_self">
-      <img src="@/assets/tmall/logo2.png" />
+      <img src="@/assets/image/tmall/logo2.png" />
     </a>
   </nav>
 </template>

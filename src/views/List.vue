@@ -18,7 +18,13 @@
 </template>
 
 <script>
-import * as net from "@/utils/net.js";
+import axios from "axios";
+axios.defaults.baseURL = "/api";
+////////////////////////////////////////////////////////////////////////////////
+function get_all_product_by_first_category_id(that, id) {
+  that;
+  return axios.get("/product/findAllByCategory/first/" + id);
+}
 import UserNavigator from "@/components/UserNavigator.vue";
 import SearchBar from "@/components/List/SearchBar.vue";
 import SortBar from "@/components/List/SortBar.vue";
@@ -42,11 +48,11 @@ export default {
   },
   methods: {},
   created() {
-    net
-      .get_all_product_by_first_category_id(this.$route.params.id)
-      .then((response) => {
-        this.products = response.data.extend.pageInfo;
-      });
+    get_all_product_by_first_category_id(this, this.$route.params.id).then(
+      (res) => {
+        this.products = res.data.extend.pageInfo;
+      }
+    );
   },
 };
 </script>

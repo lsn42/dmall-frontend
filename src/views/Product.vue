@@ -8,12 +8,7 @@
     <div class="main">
       <div class="column">
         <Gallery :images="gallery_images" :promise="promise" />
-        <Info
-          :product="product"
-          :promise="promise"
-          @buy="buy"
-          @cart="cart"
-        />
+        <Info :product="product" :promise="promise" @buy="buy" @cart="cart" />
         <div class="advertisement_column"></div>
       </div>
       <div class="row">
@@ -26,7 +21,51 @@
 </template>
 
 <script>
-import * as net from "@/utils/net.js";
+import axios from "axios";
+axios.defaults.baseURL = "/api";
+////////////////////////////////////////////////////////////////////////////////
+function get_categories(that) {
+  that;
+  return axios.get("category/productCategories");
+}
+function get_product(that, id) {
+  let url = "/product/detail/" + id;
+  that;
+  return axios.get(url);
+}
+function add_to_cart(that, item) {
+  let promise = axios.post("orderItem/addItem", item, {
+    headers: {
+      token: localStorage.getItem("token"),
+    },
+  });
+  promise.catch((err) => {
+    that.$alert("未知错误");
+    console.log(err);
+  });
+  return promise;
+}
+// function buy(that) {
+//   let promise = axios.post(
+//     "orderItem/addItem",
+//     {
+//       count: 1,
+//       price: 100,
+//       product_id: 1,
+//       message: "测试",
+//     },
+//     {
+//       headers: {
+//         token: localStorage.getItem("token"),
+//       },
+//     }
+//   );
+//   promise.catch((err) => {
+//     that.$alert("未知错误");
+//     console.log(err);
+//   });
+//   return promise;
+// }
 import UserNavigator from "@/components/UserNavigator.vue";
 import SearchBar from "@/components/Product/SearchBar.vue";
 import Gallery from "@/components/Product/Gallery.vue";
@@ -52,17 +91,27 @@ export default {
     Footer: Footer,
   },
   methods: {
-    buy(a) {
-      console.log("buy",a);
+    buy(info) {
+      console.log("buy", info);
     },
-    cart() {
-      console.log("cart");
+    cart(info) {
+      add_to_cart(this, {
+        count: info.count,
+        price: this.product.product.salePrice,
+        productId: this.product.product.id,
+      }).then((res) => {
+        if (res.data.code == 200) {
+          this.$alert("添加到购物车成功");
+        } else {
+          this.$alert("未知错误");
+          console.log(res);
+        }
+      });
     },
   },
   created() {
-    this.promise = net
-      .get_product(this.$route.params.id)
-      .then(async (response) => {
+    this.promise = get_product(this, this.$route.params.id).then(
+      async (response) => {
         this.product = response.data.extend;
         for (let i in this.product.images) {
           if (this.product.images[i].type == 0) {
@@ -71,8 +120,9 @@ export default {
             this.detail_images.push(this.product.images[i]);
           }
         }
-      });
-    net.get_categories().then(async (response) => {
+      }
+    );
+    get_categories(this).then(async (response) => {
       await this.promise;
       for (let i in response.data.extend.categories) {
         if (

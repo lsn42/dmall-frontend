@@ -1,6 +1,6 @@
 <template>
   <nav class="search">
-    <img src="@/assets/tmall/logo2.png" />
+    <img src="@/assets/image/tmall/logo2.png" />
     <div class="container">
       <form action="/product" method="get">
         <div class="search-input-container">
@@ -26,7 +26,13 @@
   </nav>
 </template>
 <script>
-import * as net from "@/utils/net.js";
+import axios from "axios";
+axios.defaults.baseURL = "/api";
+////////////////////////////////////////////////////////////////////////////////
+function get_categories(that) {
+  that;
+  return axios.get("category/productCategories");
+}
 export default {
   name: "SearchBar",
   data() {
@@ -41,7 +47,7 @@ export default {
     },
   },
   created() {
-    net.get_categories().then((response) => {
+    get_categories(this).then((response) => {
       this.categories = response.data.extend.categories;
     });},
 };

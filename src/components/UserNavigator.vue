@@ -4,7 +4,7 @@
       <div class="login">
         <div v-if="is_logined">
           <em>Hi，</em>
-          <a href="/user" class="user-name" target="_blank">{{ user.name }}</a>
+          <a href="/user" class="user-name" target="_blank">{{ user_name }}</a>
           <a href="/login/logout">退出</a>
         </div>
         <div v-else>
@@ -28,7 +28,7 @@
           </el-dropdown>
         </li>
         <li class="cart">
-          <img src="@/assets/tmall/cart.png" />
+          <img src="@/assets/image/tmall/cart.png" />
           <a href="/cart">购物车</a>
         </li>
         <li class="favorite">
@@ -49,7 +49,7 @@
         <li class="mobile">
           <el-dropdown>
             <span class="el-dropdown-link">
-              <img src="@/assets/tmall/mobile.png" />
+              <img src="@/assets/image/tmall/mobile.png" />
               <a href="#" title="天猫无线">手机版</a>
             </span>
             <el-dropdown-menu slot="dropdown">
@@ -178,8 +178,8 @@ export default {
   name: "UserNavigator",
   data() {
     return {
-      user: {},
-      is_logined: false,
+      user_name: localStorage.getItem("user_name"),
+      is_logined: localStorage.getItem("token") != null,
     };
   },
 };
@@ -220,9 +220,11 @@ export default {
       }
     }
   }
-  a {
+  a,
+  .el-dropdown-link {
     color: #999;
     padding-left: 20px;
+    font-size: 12px;
     text-decoration: none;
   }
 }

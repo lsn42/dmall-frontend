@@ -1,3 +1,4 @@
+<!-- not used !-->
 <template>
   <div class="qrcode">
     <span class="loginTitle">手机扫码，安全登录</span>
