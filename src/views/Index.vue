@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <UserNavigator />
-    <Search :categories="categories" />
+    <Search/>
     <div class="main">
       <DomainNavigator />
       <div class="display">

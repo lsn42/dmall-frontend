@@ -1,7 +1,8 @@
 <template>
   <div class="header">
     <a class="logo" href="/" target="_self">
-      <img src="@/assets/image/tmall/logo2.png" /><span class="cart"
+      <img src="@/assets/image/tmall/logo2.png" />
+      <span class="cart"
         >购物车</span
       >
     </a>

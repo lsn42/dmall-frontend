@@ -6,7 +6,7 @@
       <div v-if="is_found">
         <SortBar />
         <div class="show">
-          <Item v-for="p in products.list" :key="p.id" :product="p" />
+          <Item v-for="p in products" :key="p.id" :product="p" />
         </div>
       </div>
       <div v-else>
@@ -18,13 +18,6 @@
 </template>
 
 <script>
-import axios from "axios";
-axios.defaults.baseURL = "/api";
-////////////////////////////////////////////////////////////////////////////////
-function get_all_product_by_first_category_id(that, id) {
-  that;
-  return axios.get("/product/findAllByCategory/first/" + id);
-}
 import UserNavigator from "@/components/UserNavigator.vue";
 import SearchBar from "@/components/List/SearchBar.vue";
 import SortBar from "@/components/List/SortBar.vue";
@@ -46,14 +39,15 @@ export default {
     Item: Item,
     NotFound: NotFound,
   },
-  methods: {},
   created() {
-    get_all_product_by_first_category_id(this, this.$route.params.id).then(
-      (res) => {
-        this.products = res.data.extend.pageInfo;
-        console.log(this.products);
-      }
-    );
+    let pages = this.$route.params.result;
+    if (pages.total <= 0) {
+      this.$alert("没有结果捏", "提示", {
+        callback: () => this.$router.go(-1),
+      });
+    } else {
+      this.products = pages.list;
+    }
   },
 };
 </script>

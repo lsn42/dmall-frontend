@@ -1,17 +1,22 @@
 <template>
-  <nav class="header">
-    <img src="@/assets/image/tmall/logo.png" />
-    <div class="search">
-      <form @submit.prevent="search">
-        <div class="container">
+  <div class="header">
+    <a class="logo" href="/" target="_self">
+      <img src="@/assets/image/tmall/logo2.png" />
+      <span class="cart"
+        >已买到的宝贝</span
+      >
+    </a>
+    <div class="container">
+      <form action="/product" method="get">
+        <div class="search-input-container">
           <input
-            class="search"
+            class="search-input"
             type="text"
+            name="product_name"
             placeholder="搜索 天猫 商品/品牌/店铺"
             maxlength="50"
-            v-model="keyword"
           />
-          <input class="button" type="submit" value="搜索" />
+          <input class="search-button" type="submit" value="搜索" />
         </div>
       </form>
       <ul>
@@ -23,56 +28,28 @@
         </li>
       </ul>
     </div>
-  </nav>
+  </div>
 </template>
+
 <script>
 import axios from "axios";
-import Qs from "qs";
 axios.defaults.baseURL = "/api";
 ////////////////////////////////////////////////////////////////////////////////
 function get_categories(that) {
   that;
   return axios.get("category/productCategories");
 }
-function search(that, keyword) {
-  that;
-  let promise = axios.post(
-    "product/search",
-    { param: keyword },
-    {
-      transformRequest: [
-        function (data) {
-          return Qs.stringify(data);
-        },
-      ],
-    }
-  );
-  return promise;
-}
 export default {
   name: "Header",
   data() {
     return {
-      keyword: "",
-      categories: {},
+      categories: [],
     };
   },
   components: {
     "quick-search": {
       props: ["label", "url"],
       template: `<a :href="url">{{label.split("/")[0]}}</a>`,
-    },
-  },
-  methods: {
-    search() {
-      search(this, this.keyword).then((res) => {
-        this.$router.push({
-          name: "SearchResultList",
-          params: {
-            result: res.data.extend.pageInfo,
-          },
-        });
-      });
     },
   },
   created() {
@@ -82,6 +59,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 .header {
   width: 61.803%;
@@ -89,11 +67,10 @@ export default {
   margin: auto;
   display: flex;
   img {
-    float: left;
-    width: 240px;
-    height: 130px;
+    margin-top: 8px;
+    width: 190px;
   }
-  .search {
+  .container {
     width: 625px;
     padding-top: 38px;
     float: left;
@@ -101,10 +78,10 @@ export default {
     form {
       border: 2px solid #ff0036;
       border-right: 0;
-      .container {
+      .search-input-container {
         height: 36px;
         clear: both;
-        .search {
+        .search-input {
           float: left;
           height: 36px;
           width: 491px;
@@ -117,7 +94,7 @@ export default {
           vertical-align: middle;
           border: 0;
         }
-        .button {
+        .search-button {
           float: right;
           width: 132px;
           height: 36px;

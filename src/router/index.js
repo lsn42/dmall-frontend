@@ -10,6 +10,11 @@ const routes = [{
     component: () => import( /* webpackChunkName: "main" */ '../views/Index.vue')
   },
   {
+    path: '/search_result',
+    name: 'SearchResultList',
+    component: () => import( /* webpackChunkName: "main" */ '../views/SearchResultList.vue')
+  },
+  {
     path: '/list/:id',
     name: 'List',
     component: () => import( /* webpackChunkName: "main" */ '../views/List.vue')
@@ -35,7 +40,11 @@ const routes = [{
     path: '/place_order',
     name: 'PlaceOrder',
     component: () => import( /* webpackChunkName: "main" */ '../views/PlaceOrder.vue')
-
+  },
+  {
+    path: '/my/order',
+    name: 'MyOrder',
+    component: () => import( /* webpackChunkName: "main" */ '../views/MyOrder.vue')
   },
   {
     path: '/home',

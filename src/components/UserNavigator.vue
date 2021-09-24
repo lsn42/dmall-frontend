@@ -21,7 +21,7 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <a href="/order/0/10">已买到的宝贝</a>
+                <a href="/my/order">已买到的宝贝</a>
               </el-dropdown-item>
               <el-dropdown-item><a href="#">已卖出的宝贝</a></el-dropdown-item>
             </el-dropdown-menu>

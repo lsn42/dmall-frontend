@@ -45,27 +45,6 @@ function add_to_cart(that, item) {
   });
   return promise;
 }
-// function buy(that) {
-//   let promise = axios.post(
-//     "orderItem/addItem",
-//     {
-//       count: 1,
-//       price: 100,
-//       product_id: 1,
-//       message: "测试",
-//     },
-//     {
-//       headers: {
-//         token: localStorage.getItem("token"),
-//       },
-//     }
-//   );
-//   promise.catch((err) => {
-//     that.$alert("未知错误");
-//     console.log(err);
-//   });
-//   return promise;
-// }
 import UserNavigator from "@/components/UserNavigator.vue";
 import SearchBar from "@/components/Product/SearchBar.vue";
 import Gallery from "@/components/Product/Gallery.vue";
